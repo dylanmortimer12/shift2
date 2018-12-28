@@ -177,10 +177,10 @@
             let new_circles = circles.enter()
                 .append("circle")
                 .attr("cx", (d,i)=> {
-                  console.log(d.cx - 8);
+                  console.log(d.cx);
                   return d.cx - 8;
                 })
-                .attr("cy", (d) => d.cy-115)
+                .attr("cy", (d) => d.cy)
                 .attr("r", 5);
 
             circles = circles.merge(new_circles);
