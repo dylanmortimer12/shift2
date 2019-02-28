@@ -19,6 +19,13 @@
     </svg>
     <div id="countMenu">
         <div class="buttonGroup">
+            <h2>Name</h2>
+
+            <form id="nameForm">
+              <input id="nameGroup"></input>
+            </form>
+        </div>
+        <div class="buttonGroup">
             <h2>Balls</h2>
 
             <form id="ballForm">
@@ -38,7 +45,7 @@
         </div>
     </div>
     <div id="handMenu">
-        <h2>Pitcher</h2>
+        <h2>Pitcher Hand</h2>
         <form id="pitcherForm">
           <div><input class="pitcherGroup" type="radio" name="radioButton" checked=true id="left">Left</input></div>
           <div><input class="pitcherGroup" type="radio" name="radioButton" id="right">Right</input></div>
@@ -70,6 +77,8 @@
             .attr("height",369);
 
         let angle;
+        let x_co;
+        let y_co;
 
         d3.select("#field").on('click',function(event){
 
@@ -82,6 +91,8 @@
                 opposite = coordinates[0] - 155;
                 adjacent = y - coordinates[1];
                 angle = Math.atan2(adjacent,opposite);
+                x_co = coordinates[0];
+                y_co = coordinates[1];
                 dataObj = {
                   "cx": coordinates[0],
                   "cy": coordinates[1],
@@ -123,6 +134,7 @@
             let strikes;
             let pitcher;
             let hitter;
+            let name;
 
             for(i=0;i<document.getElementsByClassName("ballGroup").length;i++){
                 //console.log(document.getElementsByClassName("ballGroup")[i]);
@@ -152,11 +164,16 @@
                     console.log(document.getElementsByClassName("hitterGroup")[i].id);
                 }
             }
+            console.log(document.getElementById("nameGroup").value);
+            name = document.getElementById("nameGroup").value;
 
             if(angle){
               console.log("test");
               pending = 0;
               submitted.push({
+                name: name,
+                cx: x_co,
+                cy: y_co,
                 hit_angle: angle,
                 balls: balls,
                 strikes: strikes,
